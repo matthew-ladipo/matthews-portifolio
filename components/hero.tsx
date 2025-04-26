@@ -5,6 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Mail, Phone, Linkedin, Github, Download, ArrowDown } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { FaGithub } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+
+
 
 export default function Hero() {
   const [isDownloading, setIsDownloading] = useState(false)
@@ -80,7 +84,7 @@ export default function Hero() {
           target="_blank"
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
-          <Linkedin size={18} />
+          <FaLinkedin size={18} />
           <span>LinkedIn</span>
         </Link>
         <Link
@@ -88,7 +92,7 @@ export default function Hero() {
           target="_blank"
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
         >
-          <Github size={18} />
+          <FaGithub size={18} />
           <span>GitHub</span>
         </Link>
       </motion.div>
@@ -110,7 +114,7 @@ export default function Hero() {
           className="gap-2 relative overflow-hidden group"
           disabled={isDownloading}
         >
-          <span className="relative z-10">{isDownloading ? "Downloading..." : "Download Resume"}</span>
+          <a  href="Matthew-Ladipo-FlowCV-Resume-20250423.pdf" download className="relative z-10">{isDownloading ? "Downloading..." : "Download Resume"}</a>
           <span className="absolute inset-0 bg-primary/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
           <Download size={16} className="relative z-10" />
         </Button>

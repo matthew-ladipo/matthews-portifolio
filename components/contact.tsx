@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -25,24 +24,48 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
-      toast({
-        title: "Message sent!",
-        description: "Thank you for your message. I'll get back to you soon.",
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send message')
+      }
+
+      toast({
+        title: "Success!",
+        description: "Your message has been sent successfully.",
+        variant: "default",
+      })
+
+      // Reset form
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
       })
-    }, 1500)
+
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Something went wrong",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -160,6 +183,7 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="space-y-2">
@@ -174,6 +198,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleChange}
                         required
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -189,6 +214,7 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
@@ -204,6 +230,7 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
 
