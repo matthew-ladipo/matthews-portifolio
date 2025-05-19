@@ -46,7 +46,7 @@ export default function Experience() {
         "Managed projects from requirements gathering to deployment.",
         "Provided ongoing maintenance and support for client websites.",
       ],
-      technologies: ["HTML", "CSS", "JavaScript", "WordPress"],
+      technologies: ["HTML", "CSS", "JavaScript", "React js"],
     },
   ]
 

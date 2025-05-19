@@ -28,12 +28,12 @@ export default function Projects() {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Touch And Pay Tech UI",
+      title: "Switch Blog Platform",
       description:
         "Responsive user interface for a payment platform built during my internship at Touch And Pay Technologies.",
-      image: "/code.jpg",
+      image: "/Hardware.png",
       type: ["frontend"],
-      technologies: ["React", "JavaScript", "CSS", "RESTful API"],
+      technologies: ["Next js", "React js", "Tailwind CSS", "RESTful API"],
       liveUrl: "https://example.com/touchandpay",
       githubUrl: "https://github.com/matthew-ladipo/touchandpay-ui",
     },
@@ -41,18 +41,18 @@ export default function Projects() {
       id: 2,
       title: "Freelance Client Website",
       description: "Custom website developed for Muritadoh Sodeeq with focus on performance and responsive design.",
-      image: "/code.jpg",
+      image: "/Hardware.png",
       type: ["frontend"],
       technologies: ["HTML", "CSS", "JavaScript"],
-      liveUrl: "https://example.com/muritadoh",
-      githubUrl: "https://github.com/matthew-ladipo/muritadoh-website",
+      liveUrl: "https://movie-app-livid-rho.vercel.app/list",
+      githubUrl: "https://github.com/matthew-ladipo/Movie-App",
     },
     {
       id: 3,
       title: "Xpertech Solution Group Project",
       description:
         "Full-stack web application developed for Xpertech Solution Group with user authentication and database integration.",
-      image: "/code.jpg",
+      image: "/Hardware.png",
       type: ["fullstack", "backend"],
       technologies: ["PHP", "Laravel", "MySQL", "Bootstrap"],
       liveUrl: "https://example.com/xpertech",
@@ -61,19 +61,31 @@ export default function Projects() {
     {
       id: 4,
       title: "E-commerce Platform",
-      description: "A full-featured e-commerce platform with product catalog, shopping cart, and payment integration.",
-      image: "/code.jpg",
+      description: "A full-featured e-commerce platform with product catalog, shopping cart.",
+      image: "/Hardware.png",
       type: ["fullstack"],
       technologies: ["React", "Node.js", "Express", "MongoDB"],
-      githubUrl: "https://github.com/matthew-ladipo/ecommerce-platform",
+      liveUrl: "https://react-store-three-beta.vercel.app/",
+      githubUrl: "https://github.com/matthew-ladipo/react-store",
     },
     {
       id: 5,
-      title: "Task Management API",
+      title: "Countries RESTful API",
       description: "RESTful API for task management with authentication and authorization features.",
-      image: "/code.jpg",
+      image: "/Hardware.png",
       type: ["backend"],
       technologies: ["Node.js", "Express", "MongoDB", "JWT"],
+      liveUrl: "https://rest-countries-api-lime-theta.vercel.app/",
+      githubUrl: "https://github.com/matthew-ladipo/REST-Countries-API",
+    },
+     {
+      id: 5,
+      title: "Departmental Lecture Repository System",
+      description: "RESTful API for task management with authentication and authorization features.",
+      image: "/Hardware.png",
+      type: ["backend"],
+      technologies: ["Node.js", "Express", "MongoDB", "JWT"],
+      liveUrl: "https://example.com/muritadoh",
       githubUrl: "https://github.com/matthew-ladipo/task-api",
     },
   ]
@@ -110,7 +122,7 @@ export default function Projects() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((project) => (
                 <Card key={project.id} className="overflow-hidden flex flex-col h-full">
-                  <div className="relative h-48 w-full">
+                  <div className="relative h-40 w-full">
                     <Image
                       src={project.image || "/placeholder.svg"}
                       alt={project.title}
@@ -119,13 +131,13 @@ export default function Projects() {
                     />
                   </div>
                   <CardHeader>
-                    <CardTitle>{project.title}</CardTitle>
+                    <CardTitle className="text-sm">{project.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="text-muted-foreground mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <p className="text-muted-foreground text-xs mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 ">
                       {project.technologies.map((tech, index) => (
-                        <Badge key={index} variant="secondary">
+                        <Badge key={index} variant="secondary" className="text-xs">
                           {tech}
                         </Badge>
                       ))}
@@ -135,7 +147,7 @@ export default function Projects() {
                     {project.liveUrl && (
                       <Button asChild variant="default" size="sm">
                         <Link href={project.liveUrl} target="_blank" className="flex items-center gap-2">
-                          <ExternalLink size={16} />
+                          <ExternalLink size={12} />
                           Live Demo
                         </Link>
                       </Button>
@@ -143,7 +155,7 @@ export default function Projects() {
                     {project.githubUrl && (
                       <Button asChild variant="outline" size="sm">
                         <Link href={project.githubUrl} target="_blank" className="flex items-center gap-2">
-                          <Github size={16} />
+                          <Github size={12} />
                           GitHub
                         </Link>
                       </Button>
@@ -155,12 +167,15 @@ export default function Projects() {
           </TabsContent>
           <TabsContent value="frontend" className="mt-0">
             {/* Content will be shown through the filtered projects */}
+            <p> Content will be shown through the filtered projects</p>
           </TabsContent>
           <TabsContent value="backend" className="mt-0">
             {/* Content will be shown through the filtered projects */}
+            <p>Content will be shown through the filtered projects</p>
           </TabsContent>
           <TabsContent value="fullstack" className="mt-0">
             {/* Content will be shown through the filtered projects */}
+            <p>Content will be shown through the filtered projects</p>
           </TabsContent>
         </Tabs>
       </div>

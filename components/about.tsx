@@ -21,7 +21,7 @@ export default function About() {
     {
       category: "Databases",
       icon: <Database className="h-5 w-5" />,
-      technologies: ["MySQL", "MongoDB", "PostgreSQL"],
+      technologies: ["MySQL", "MongoDB", "PostgreSQL", "Superbase"],
     },
     {
       category: "Tools & DevOps",

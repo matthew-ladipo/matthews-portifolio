@@ -37,10 +37,10 @@ export default function Contact() {
         body: JSON.stringify(formData),
       })
 
-      const data = await response.json()
+      const data: { message?: string } = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to send message')
+        throw new Error(data?.message || 'Failed to send message')
       }
 
       toast({
