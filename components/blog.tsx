@@ -7,7 +7,7 @@ interface BlogPost {
   title: string
   excerpt: string
   date: string
-  url: string
+  slug: string
 }
 
 export default function Blog() {
@@ -17,20 +17,20 @@ export default function Blog() {
       excerpt:
         "Learn about the techniques I used to improve the performance of a React application, including code splitting, memoization, and lazy loading.",
       date: "March 15, 2023",
-      url: "#",
+      slug: "optimize-react-app",
     },
     {
       title: "Building APIs with Node.js and Express",
       excerpt:
         "A step-by-step guide to creating RESTful APIs using Node.js and Express, with examples of authentication, validation, and error handling.",
       date: "January 22, 2023",
-      url: "#",
+      slug: "nodejs-express-api",
     },
     {
       title: "The Power of CSS Grid for Modern Layouts",
       excerpt: "Discover how CSS Grid can simplify complex layouts and improve responsive design in your web projects.",
       date: "November 10, 2022",
-      url: "#",
+       slug: "css-grid-layouts",
     },
   ]
 
@@ -57,10 +57,11 @@ export default function Blog() {
               </CardContent>
               <CardFooter>
                 <Button asChild variant="ghost" className="p-0 h-auto">
-                  <Link href={post.url} className="flex items-center gap-2 text-primary">
-                    Read More
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
+                <Link href={`/blog/${post.slug}`} className="flex items-center gap-2 text-primary">
+                  Read More
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+
                 </Button>
               </CardFooter>
             </Card>
