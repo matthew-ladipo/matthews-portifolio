@@ -4,6 +4,7 @@ import { ArrowRight, Calendar } from "lucide-react"
 import Link from "next/link"
 
 interface BlogPost {
+  id: number
   title: string
   excerpt: string
   date: string
@@ -12,14 +13,14 @@ interface BlogPost {
 
 export default function Blog() {
   const blogPosts: BlogPost[] = [
-    {
+    { id: 1,
       title: "How I Optimized a React App's Performance",
       excerpt:
         "Learn about the techniques I used to improve the performance of a React application, including code splitting, memoization, and lazy loading.",
       date: "March 15, 2023",
       slug: "optimize-react-app",
     },
-    {
+    {id: 2,
       title: "Building APIs with Node.js and Express",
       excerpt:
         "A step-by-step guide to creating RESTful APIs using Node.js and Express, with examples of authentication, validation, and error handling.",
@@ -27,6 +28,7 @@ export default function Blog() {
       slug: "nodejs-express-api",
     },
     {
+      id: 3,
       title: "The Power of CSS Grid for Modern Layouts",
       excerpt: "Discover how CSS Grid can simplify complex layouts and improve responsive design in your web projects.",
       date: "November 10, 2022",
@@ -43,8 +45,8 @@ export default function Blog() {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-          {blogPosts.map((post, index) => (
-            <Card key={index} className="flex flex-col h-full">
+          {blogPosts.map((post) => (
+            <Card key={post.id} className="flex flex-col h-full">
               <CardHeader>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                   <Calendar className="h-4 w-4" />
