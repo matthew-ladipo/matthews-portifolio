@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: "Matthew Ladipo - Software Developer",
   description:
     "Portfolio website of Matthew Ladipo, a Software Developer specializing in React, Node.js, and modern JavaScript.",
-    generator: 'v0.dev'
+    generator: 'matthews production'
 }
 
 export default function RootLayout({
