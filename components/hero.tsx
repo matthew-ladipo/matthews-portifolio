@@ -114,7 +114,7 @@ export default function Hero() {
           className="gap-2 relative overflow-hidden group"
           disabled={isDownloading}
         >
-          <a  href="Matthew-Ladipo-FlowCV-Resume-20250423.pdf" download className="relative z-10">{isDownloading ? "Downloading..." : "Download Resume"}</a>
+          <a  href="Ladipo-Matthew-cv.pdf.pdf" download className="relative z-10">{isDownloading ? "Downloading..." : "Download Resume"}</a>
           <span className="absolute inset-0 bg-primary/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
           <Download size={16} className="relative z-10" />
         </Button>

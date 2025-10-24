@@ -16,17 +16,17 @@ export default function About() {
     {
       category: "Backend",
       icon: <Server className="h-5 w-5" />,
-      technologies: ["Node.js", "PHP", "Laravel", "Django", "Express"],
+      technologies: ["Node.js", "PHP", "Laravel", "Django", "Express", "C#", "ASP.NET Core"],
     },
     {
       category: "Databases",
       icon: <Database className="h-5 w-5" />,
-      technologies: ["MySQL", "MongoDB", "PostgreSQL", "Superbase"],
+      technologies: ["MySQL", "MongoDB", "PostgreSQL", "Superbase", "SQLite", "SQL Server", "Firebase", "Prisma"],
     },
     {
       category: "Tools & DevOps",
       icon: <Workflow className="h-5 w-5" />,
-      technologies: ["Git", "GitHub", "VS Code", "Docker"],
+      technologies: ["Git", "GitHub", "GitLab", "VS Code", "Docker", "CI/CD",  "Postman"],
     },
     {
       category: "Design",
