@@ -1,34 +1,61 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resendApiKey = process.env.RESEND_API_KEY;
-const resend = resendApiKey ? new Resend(resendApiKey) : null;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function sanitizeString(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
 
 export async function POST(req: Request) {
   try {
-    const { name, email, subject, message, website, company } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const name = sanitizeString(body?.name);
+    const email = sanitizeString(body?.email);
+    const subject = sanitizeString(body?.subject);
+    const message = sanitizeString(body?.message);
+    const website = sanitizeString(body?.website);
+    const company = sanitizeString(body?.company);
 
     if (website || company) {
+      return NextResponse.json({ message: "Spam detected." }, { status: 400 });
+    }
+
+    if (!name || !email || !subject || !message) {
       return NextResponse.json(
-        { message: "Spam detected." },
+        { message: "Please complete all required fields." },
         { status: 400 }
       );
     }
 
-    if (!resend || !process.env.EMAIL_RECEIVER) {
+    if (!EMAIL_REGEX.test(email)) {
       return NextResponse.json(
-        { message: "Contact form is not configured yet. Add RESEND_API_KEY and EMAIL_RECEIVER to enable email sending." },
+        { message: "Please enter a valid email address." },
+        { status: 400 }
+      );
+    }
+
+    const resendApiKey = process.env.RESEND_API_KEY;
+    const emailReceiver = process.env.EMAIL_RECEIVER;
+    const fromAddress = process.env.RESEND_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";
+
+    if (!resendApiKey || !emailReceiver) {
+      return NextResponse.json(
+        {
+          message:
+            "Contact form is not configured yet. Add RESEND_API_KEY and EMAIL_RECEIVER to enable email sending.",
+        },
         { status: 503 }
       );
     }
 
+    const resend = new Resend(resendApiKey);
+
     await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>", // replace with your domain later
-      to: process.env.EMAIL_RECEIVER,
+      from: fromAddress,
+      to: emailReceiver,
+      replyTo: email,
       subject: subject || `New message from ${name}`,
-      headers: {
-        "Reply-To": email, // ✅ correct way to allow direct replies
-      },
       html: `
         <h1>New Contact Form Submission</h1>
         <p><strong>Name:</strong> ${name}</p>
