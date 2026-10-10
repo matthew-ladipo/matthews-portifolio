@@ -17,6 +17,7 @@ export default function Contact() {
     email: "",
     subject: "",
     message: "",
+    website: "",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,6 +27,43 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const trimmedFormData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      subject: formData.subject.trim(),
+      message: formData.message.trim(),
+      website: formData.website.trim(),
+    }
+
+    if (trimmedFormData.website) {
+      toast({
+        title: "Spam check failed",
+        description: "Your message could not be sent.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    if (!trimmedFormData.name || !trimmedFormData.email || !trimmedFormData.subject || !trimmedFormData.message) {
+      toast({
+        title: "Please complete all fields",
+        description: "All form fields are required before sending your message.",
+        variant: "destructive",
+      })
+      return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(trimmedFormData.email)) {
+      toast({
+        title: "Invalid email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
@@ -34,7 +72,7 @@ export default function Contact() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(trimmedFormData),
       })
 
       const data: { message?: string } = await response.json()
@@ -55,6 +93,7 @@ export default function Contact() {
         email: "",
         subject: "",
         message: "",
+        website: "",
       })
 
     } catch (error) {
@@ -233,6 +272,17 @@ export default function Contact() {
                       disabled={isSubmitting}
                     />
                   </div>
+
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    className="hidden"
+                    aria-hidden="true"
+                  />
 
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? (

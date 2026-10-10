@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, Linkedin, Github, Download, ArrowDown } from "lucide-react"
+import { Mail, Phone, ArrowDown } from "lucide-react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { FaGithub } from "react-icons/fa6";
@@ -11,15 +10,11 @@ import { FaLinkedin } from "react-icons/fa";
 
 
 export default function Hero() {
-  const [isDownloading, setIsDownloading] = useState(false)
-
-  const handleDownload = () => {
-    setIsDownloading(true)
-    // Simulate download delay
-    setTimeout(() => {
-      setIsDownloading(false)
-    }, 2000)
-    // In a real implementation, you would link to an actual PDF file
+  const handleContactClick = () => {
+    const contactSection = document.getElementById("contact")
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" })
+    }
   }
 
   const scrollToProjects = () => {
@@ -109,14 +104,13 @@ export default function Hero() {
           <ArrowDown size={16} className="relative z-10" />
         </Button>
         <Button
-          onClick={handleDownload}
+          onClick={handleContactClick}
           variant="outline"
           className="gap-2 relative overflow-hidden group"
-          disabled={isDownloading}
         >
-          <a  href="Ladipo-Matthew-cv.pdf.pdf" download className="relative z-10">{isDownloading ? "Downloading..." : "Download Resume"}</a>
+          <span className="relative z-10">Let’s Talk</span>
           <span className="absolute inset-0 bg-primary/10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
-          <Download size={16} className="relative z-10" />
+          <Mail size={16} className="relative z-10" />
         </Button>
       </motion.div>
 

@@ -34,7 +34,6 @@ export default function Projects() {
       image: "/Hardware.png",
       type: ["frontend"],
       technologies: ["Next js", "React js", "Tailwind CSS", "RESTful API"],
-      liveUrl: "https://example.com/touchandpay",
       githubUrl: "https://github.com/matthew-ladipo/touchandpay-ui",
     },
     {
@@ -55,7 +54,6 @@ export default function Projects() {
       image: "/Hardware.png",
       type: ["fullstack", "backend"],
       technologies: ["PHP", "Laravel", "MySQL", "Bootstrap"],
-      liveUrl: "https://example.com/xpertech",
       githubUrl: "https://github.com/matthew-ladipo/xpertech-solution",
     },
     {
@@ -79,13 +77,12 @@ export default function Projects() {
       githubUrl: "https://github.com/matthew-ladipo/REST-Countries-API",
     },
      {
-      id: 5,
+      id: 6,
       title: "Departmental Lecture Repository System",
       description: "RESTful API for task management with authentication and authorization features.",
       image: "/Hardware.png",
       type: ["backend"],
       technologies: ["Node.js", "Express", "MongoDB", "JWT"],
-      liveUrl: "https://example.com/muritadoh",
       githubUrl: "https://github.com/matthew-ladipo/task-api",
     },
   ]
@@ -100,21 +97,13 @@ export default function Projects() {
           A selection of my recent work showcasing my skills in frontend, backend, and full-stack development.
         </p>
 
-        <Tabs defaultValue="all" className="mb-12">
+        <Tabs value={activeFilter} onValueChange={(value) => setActiveFilter(value as ProjectType)} className="mb-12">
           <div className="flex justify-center mb-8">
             <TabsList>
-              <TabsTrigger value="all" onClick={() => setActiveFilter("all")}>
-                All Projects
-              </TabsTrigger>
-              <TabsTrigger value="frontend" onClick={() => setActiveFilter("frontend")}>
-                Frontend
-              </TabsTrigger>
-              <TabsTrigger value="backend" onClick={() => setActiveFilter("backend")}>
-                Backend
-              </TabsTrigger>
-              <TabsTrigger value="fullstack" onClick={() => setActiveFilter("fullstack")}>
-                Full-Stack
-              </TabsTrigger>
+              <TabsTrigger value="all">All Projects</TabsTrigger>
+              <TabsTrigger value="frontend">Frontend</TabsTrigger>
+              <TabsTrigger value="backend">Backend</TabsTrigger>
+              <TabsTrigger value="fullstack">Full-Stack</TabsTrigger>
             </TabsList>
           </div>
 

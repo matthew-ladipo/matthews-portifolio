@@ -1,14 +1,25 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 export async function POST(req: Request) {
   try {
-    const { name, email, subject, message } = await req.json();
+    const { name, email, subject, message, website, company } = await req.json();
 
-    if (!process.env.EMAIL_RECEIVER) {
-      throw new Error("EMAIL_RECEIVER environment variable not set");
+    if (website || company) {
+      return NextResponse.json(
+        { message: "Spam detected." },
+        { status: 400 }
+      );
+    }
+
+    if (!resend || !process.env.EMAIL_RECEIVER) {
+      return NextResponse.json(
+        { message: "Contact form is not configured yet. Add RESEND_API_KEY and EMAIL_RECEIVER to enable email sending." },
+        { status: 503 }
+      );
     }
 
     await resend.emails.send({
