@@ -50,8 +50,7 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.6 }}
       >
         <p className="max-w-2xl text-muted-foreground mb-8 text-lg">
-          Building responsive, user-centric web applications with React, Node.js, and modern JavaScript.
-        </p>
+Turning ideas into exceptional digital experiences through clean code, thoughtful design, and intelligent engineering. I build modern, responsive web applications that solve real problems and deliver meaningful results.        </p>
       </motion.div>
 
       <motion.div
